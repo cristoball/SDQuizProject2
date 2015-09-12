@@ -19,10 +19,10 @@
 			<input type="radio" name="ans" value="${a.value}"> ${a.value}</input>
 			<br />
 		</c:forEach>
-		<input type="hidden" name="quesID" value="${question.id }" /> <br />
+		<input type="hidden" name="currentQuestionID" value="${question.id }" /> <br />
 		<input type="submit" value="Submit Answer" />
 	</form>
 
-	
+<%--  	<jsp:include page="sessioninfo.jsp"></jsp:include>  --%>
 </body>
 </html>

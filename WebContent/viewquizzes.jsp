@@ -27,7 +27,7 @@
 			<td><%= quiz.getQuizID() %></td>
 			<td><%= quiz.getQuizName() %></td>
 			<td><%= quiz.getNumberOfQuestions() %></td>
-			<td><a href="questions.html?startQuiz=1&questionID=1">Start!</a></td>
+			<td><a href="questions.html?startQuiz=1">Start!</a></td>
 		</tr>
 	</table>
 

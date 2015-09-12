@@ -1,5 +1,8 @@
 package com.maultex.web;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import quiz.data.DataSource;
 import quiz.data.Question;
 import quiz.data.Quiz;
 import quiz.data.QuizDB;
@@ -26,13 +30,17 @@ public class QuestionController
 	 * @param answer
 	 * @param session
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView onGetQuestion(String startQuiz, HttpSession session)
+	public ModelAndView onGetQuestion(String startQuiz, HttpSession session) throws Exception
 	{
 
 		System.out.println("Creating new Quiz object");
-		Quiz quiz = new QuizInMemory();
+		//Quiz quiz = new QuizInMemory();
+		
+		Connection conn = DataSource.getConnection();
+		Quiz quiz = (Quiz)session.getAttribute("quiz");//new QuizDB(conn);
 		session.setAttribute("quiz", quiz);
 		// session.setAttribute("count", 1);
 		
@@ -54,9 +62,11 @@ public class QuestionController
 	 * @param quesID
 	 * @param session
 	 * @return
+	 * @throws Exception 
+	 * @throws SQLException 
 	 */
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView onPostQuestion(String ans, String currentQuestionID, HttpSession session)
+	public ModelAndView onPostQuestion(String ans, String currentQuestionID, HttpSession session) throws SQLException, Exception
 	{
 		System.out.println("Answer = " + ans);
 		System.out.println("quesID = " + currentQuestionID);
@@ -80,6 +90,7 @@ public class QuestionController
 		
 		if (questionListIndex == nQuestionListSize - 1)// No more questions
 		{
+			DataSource.getConnection().close();
 			return new ModelAndView("results", "quiz", quiz);	
 		} 
 		else 

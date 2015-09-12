@@ -31,6 +31,6 @@
 		</tr>
 	</table>
 
-	<jsp:include page="sessioninfo.jsp"></jsp:include>
+<%-- 	<jsp:include page="sessioninfo.jsp"></jsp:include> --%>
 </body>
 </html>

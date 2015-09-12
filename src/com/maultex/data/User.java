@@ -2,6 +2,7 @@ package com.maultex.data;
 
 public class User
 {
+	private int id;
 	private String email;
 	private String password;
 	private String firstName;
@@ -9,6 +10,12 @@ public class User
 	
 	public User()
 	{
+		
+	}
+	
+	public void setID(int id)
+	{
+		this.id = id;
 		
 	}
 	
@@ -44,5 +51,7 @@ public class User
 	{
 		this.lastName = lastName;
 	}
+
+
 	
 }

@@ -20,55 +20,17 @@ public class UserManager implements Authenticate
 	 */
 	public User login(String username, String password)
 	{
-		// if (username.equals("test@test.net"))
-		// {
-		// if (password.equals("test"))
-		// {
-		// User loggedInUser = new User();
-		// loggedInUser.setEmail(username);
-		// loggedInUser.setFirstName("Chris");
-		// loggedInUser.setLastName("Mauldin");
-		// return loggedInUser;
-		// }
-		//
-		// }
-		// return null;
 
-		//String URL = "jdbc:derby://localhost:1527/quiz";
-		//String dbUrl = "jdbc:derby:/Users/christomaul/SD/databases/quiz";
 		String sqltxt;
-		sqltxt = "Select email, password " + 
+		sqltxt = "Select id, firstname, lastname, email, password " + 
 				"From App.Account " + 
 				"Where email = '" + username + "' " + //joe@example.com' "
 				"And password = '" + password + "'";// joe'";
 
 		try
 		{
-			//
-			// Print out all loaded JDBC drivers.
-//			java.util.Enumeration e = java.sql.DriverManager.getDrivers();
-//			System.out.println("BEFORE DRIVER LOAD");
-//			while (e.hasMoreElements())
-//			{
-//				Object driverAsObject = e.nextElement();
-//				System.out.println("JDBC Driver=" + driverAsObject);
-//			}
 
-			//Class driverClass = Class.forName("org.apache.derby.jdbc.ClientDriver");
-//			Class driverClass = Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-//			DriverManager.registerDriver((Driver) driverClass.newInstance());
-//			Connection conn = DriverManager.getConnection(dbUrl);
 			Connection conn = DataSource.getConnection();
-			
-//			System.out.println("AFTER DRIVER LOAD");
-//			// Print out all loaded JDBC drivers.
-//			e = java.sql.DriverManager.getDrivers();
-//			while (e.hasMoreElements())
-//			{
-//				Object driverAsObject = e.nextElement();
-//				System.out.println("JDBC Driver=" + driverAsObject);
-//			}
-
 			
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sqltxt);
@@ -84,11 +46,12 @@ public class UserManager implements Authenticate
 			System.out.println("User found in db. Authenticate.");
 			if (rs.next())
 			{
-				System.out.println("Email=" + rs.getString(1) + ", password=" + rs.getString(2));
+				System.out.println("Email=" + rs.getString(4) + ", password=" + rs.getString(5));
 				User loggedInUser = new User();
 				loggedInUser.setEmail("chris.mauldin@gmail.com");
-				loggedInUser.setFirstName("Chris");
-				loggedInUser.setLastName("Mauldin");
+				loggedInUser.setFirstName(rs.getString(2));
+				loggedInUser.setLastName(rs.getString(3));
+				loggedInUser.setID(rs.getInt(1));
 				System.out.println("User found: " + loggedInUser);
 				return loggedInUser;
 			} else

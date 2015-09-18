@@ -1,0 +1,32 @@
+<!-- Copyright 2010 Edward Rayl. All rights reserved by Capstone Courseware, LLC. -->
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="EarthlingsPU" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+		<mapping-file>META-INF/orm.xml</mapping-file>
+
+		<class>quiz.jpa.Answer</class>
+		<class>quiz.jpa.Question</class>
+		<class>quiz.jpq.Quiz</class>
+
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/quiz" />
+			<property name="javax.persistence.jdbc.user" value="test" />
+			<property name="javax.persistence.jdbc.password" value="test" />
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" />
+			<property name="eclipselink.logging.level" value="WARNING" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSixDialect" />
+			<property name="openjpa.RuntimeUnenhancedClasses" value="supported" />
+			<property name="openjpa.Compatibility" value="QuotedNumbersInQueries=true" />
+			<property name="openjpa.Log" value="DefaultLevel=ERROR, Runtime=WARN, Tool=WARN" />
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

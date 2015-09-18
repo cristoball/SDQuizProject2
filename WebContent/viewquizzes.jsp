@@ -15,15 +15,15 @@
 <title>Quizzes</title>
 </head>
 <body>
-	<h1>Quizzes</h1>
-	<table border="1">
-		<tr>
+	<h1>Available Quizzes</h1>
+	<table border="1"  >
+		<tr align="center">
 			<td>ID</td>
-			<td>Name</td>
-			<td>Num Questions</td>
+			<td>Quiz Name</td>
+			<td># of Questions</td>
 			<td></td>
 		</tr>
-		<tr>
+		<tr align="center">
 			<td><%= quiz.getQuizID() %></td>
 			<td><%= quiz.getQuizName() %></td>
 			<td><%= quiz.getNumberOfQuestions() %></td>
@@ -31,6 +31,6 @@
 		</tr>
 	</table>
 
-<%-- 	<jsp:include page="sessioninfo.jsp"></jsp:include> --%>
+<jsp:include page="debuginfo.jsp"/>
 </body>
 </html>

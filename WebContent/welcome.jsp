@@ -10,7 +10,7 @@
 
 <jsp:include page="mainmenu.jsp"/>
 
-<jsp:include page="sessioninfo.jsp"/>
 
+<jsp:include page="debuginfo.jsp"/>
 </body>
 </html>

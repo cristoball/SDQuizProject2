@@ -18,5 +18,7 @@
 <b>*Guests use:</b><br/>
 username: test@test.net<br/>
 password: test<br/>
+<br/>
+<jsp:include page="debuginfo.jsp"/>
 </body>
 </html>

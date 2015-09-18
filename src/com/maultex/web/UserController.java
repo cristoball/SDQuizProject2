@@ -1,5 +1,7 @@
 package com.maultex.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +19,7 @@ import com.maultex.data.UserManager;
 public class UserController
 {
 	@RequestMapping(value="/login",method = RequestMethod.POST)
-	public ModelAndView onSubmit(String username, String password) 
+	public ModelAndView onSubmit(String username, String password, HttpSession session) 
 	{
 		System.out.println(username + " " + password);
 		Authenticate authenticator = new UserManager();
@@ -26,6 +28,7 @@ public class UserController
 		if (user != null)
 		{
 			//Go to Welcome page
+			session.setAttribute("user", user);
 			return new ModelAndView("welcome", "user", user);
 		}
 		else

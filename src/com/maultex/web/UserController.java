@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maultex.data.Authenticate;
@@ -14,11 +13,10 @@ import com.maultex.data.UserManager;
 
 
 @Controller
-@SessionAttributes
-//@RequestMapping("/login")
+@RequestMapping("/login")
 public class UserController
 {
-	@RequestMapping(value="/login",method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ModelAndView onSubmit(String username, String password, HttpSession session) 
 	{
 		System.out.println(username + " " + password);
@@ -29,7 +27,8 @@ public class UserController
 		{
 			//Go to Welcome page
 			session.setAttribute("user", user);
-			return new ModelAndView("welcome", "user", user);
+			//return new ModelAndView("welcome", "user", user);
+			return new ModelAndView("welcome");
 		}
 		else
 		{
@@ -40,10 +39,17 @@ public class UserController
 		
 	}
 	
-	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String onGet() 
+	@RequestMapping(method = RequestMethod.GET)
+	public String onGet(HttpSession session) 
 	{
+		clearSession(session);
 		return "signin";
 		
+	}
+
+	private void clearSession(HttpSession session)
+	{
+		session.removeAttribute("user");
+		session.removeAttribute("quiz");
 	}
 }

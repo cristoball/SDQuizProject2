@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="quiz.data.*"%>
-<%@ page import="java.sql.Connection"%>
-<%@ page import="java.sql.DriverManager"%>
-<%@ page import="java.sql.Statement"%>
-<%@ page import="java.sql.ResultSet"%>
-<%@ page import="java.sql.SQLException"%>
-<%
-	Quiz quiz = (Quiz) request.getAttribute("quiz");
-%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet" href="style.css">
 <title>Quizzes</title>
 </head>
 <body>
@@ -24,9 +17,9 @@
 			<td></td>
 		</tr>
 		<tr align="center">
-			<td><%= quiz.getQuizID() %></td>
-			<td><%= quiz.getQuizName() %></td>
-			<td><%= quiz.getNumberOfQuestions() %></td>
+			<td>${quiz.quizID}</td>
+			<td>${quiz.quizName}</td>
+			<td>${quiz.numberOfQuestions}</td>
 			<td><a href="questions.html?startQuiz=1">Start!</a></td>
 		</tr>
 	</table>

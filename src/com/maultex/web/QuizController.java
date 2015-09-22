@@ -17,20 +17,19 @@ import quiz.data.QuizInMemory;
 
 
 @Controller
-@SessionAttributes
 @RequestMapping("/quiz")
 public class QuizController
 {
 
-	
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView onGet(HttpSession session) throws Exception 
+	//public ModelAndView onGet(HttpSession session) throws Exception
+	public String onGet(HttpSession session) throws Exception
 	{
 		//Quiz quiz = new QuizInMemory();
 		Quiz quiz = new QuizDB(DataSource.getConnection());
 		session.setAttribute("quiz", quiz);
-		return new ModelAndView("viewquizzes", "quiz", quiz);
-		
+		//return new ModelAndView("viewquizzes", "quiz", quiz);
+		return "viewquizzes";
 	}
 	
 }

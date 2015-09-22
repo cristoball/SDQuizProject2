@@ -12,8 +12,13 @@
 	String lastAccessedDate = date.toString();
 %>
 
-<br />
-<hr />
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<hr/>
 <h2>Request Information</h2>
 <table border="1">
 	<tr>

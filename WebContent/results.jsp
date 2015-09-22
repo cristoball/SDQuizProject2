@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="quiz.data.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet" href="style.css">
 <title>Quiz Results: ${quiz.quizName}</title>
 </head>
 <body>
 	<h1>Quiz Results: ${quiz.quizName}</h1>
 	<c:forEach var="ques" items="${quiz.questions}">
+		<form id="formQuestion${ques.id}" method="get" action="" onsubmit="return false;">
 		<b>Question ${ques.id}: ${ques.value}</b>
 		<br />
 		<c:forEach var="answers" items="${ques.answers}">
@@ -22,13 +22,14 @@
 		<i>You answered: ${ques.givenAnswer}</i>
 		<br />
 		<b>Correct Answer: ${ques.correctAnswer.value}</b>
+		</form>
 		<br/>
 		<br/>
 	</c:forEach>
 	<br/>
-	Total Questions: ${TotalQuestions}<br/>
+	Total Questions: ${quiz.numberOfQuestions}<br/>
 	Total Correct Answers: ${TotalCorrect}<br/>
-	Percent correct: <fmt:formatNumber value="${TotalCorrect / TotalQuestions}" type="percent" /><br/>
+	Percent correct: <fmt:formatNumber value="${TotalCorrect / quiz.numberOfQuestions}" type="percent" /><br/>
 
 
 <jsp:include page="debuginfo.jsp"/>

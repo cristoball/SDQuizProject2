@@ -1,0 +1,148 @@
+body {
+	background-color: #ccc;
+}
+
+h1 {
+	width: 1000px;
+	margin: 5px auto;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #930;
+	font-size: xx-large;
+	color: #930;
+}
+
+/*Begin Form Styles*/
+form {
+	width: 1000px;
+	margin: auto;
+	padding-bottom: 20px;
+	color: #930;
+	border: 1px solid black;
+}
+
+fieldset {
+	width: 480px; margin-bottom : 10px;
+	border-bottom: 1px solid #930;
+	background-color: #eec;
+	margin-bottom: 10px;
+}
+
+legend {
+	padding-left: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	letter-spacing: .5em;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-variant: small-caps;
+	color: #460;
+}
+
+fieldset fieldset {
+	margin-top: 10px;
+	border-bottom: none;
+}
+
+fieldset fieldset legend {
+	font-size: 1em;
+	font-weight: bold;
+	letter-spacing: .4em;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #333;
+}
+
+form ol {
+	padding: 20px;
+}
+
+fieldset fieldset ol {
+	margin-top: -10px;
+}
+
+form p {
+	margin: 10px;
+	font-size: .8em;
+}
+
+form li {
+	list-style-type: none;
+	border-bottom: 1px dotted #000;
+	padding-bottom: 2px;
+	margin-bottom: 2px;
+}
+
+label {
+	width: 200px;
+	float: left;
+	font-weight: bold;
+}
+
+span.label {
+	font-weight: bold;
+}
+
+li.radioContainer label {
+	display: block;
+	float: none;
+	font-weight: normal;
+}
+
+select, input[type="text"] {
+	width: 200px;
+}
+
+textarea {
+	width: 400px;
+	height: 50px;
+}
+
+
+#buttons input {
+	height: 100px;
+	width: 350px;
+	font-size: 1.5em;
+	color: #930;
+	font-variant: small-caps;
+	margin: 10px;
+}
+
+#buttons input:hover {
+	height: 100px;
+	width: 350px;
+	background-color: #dda;
+}
+
+#jobInfo {
+	height: 164px;
+}
+
+#personalInfo {
+	display: block;
+	position: relative;
+	left: 520px;
+	top: -175px;
+	height: 419px;
+}
+
+#employmentHistory {
+	display: block;
+	position: relative;
+	top: -430px;
+	height: 1021px;
+}
+
+#education {
+	display: block;
+	position: relative;
+	top: -1205px;
+	left: 520px;
+}
+
+#buttons {
+	display: block;
+	/* 	padding: 27px 0px; */
+	position: relative;
+	top: -1205px;
+	left: 520px;
+	text-align: center;
+}
+/*End Form Styles*/

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import quiz.data.Answer;
 
@@ -27,6 +28,7 @@ public class Question
 	@OneToMany(mappedBy="question")
 	private List<Answer> answers;
 
+	@Transient
 	private String givenAnswer;
 	
 	@ManyToMany(mappedBy="quiz")

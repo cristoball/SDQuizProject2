@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link type="text/css" rel="stylesheet" href="style.css">
 <title>Welcome ${user.firstName}</title>
 </head>
 <body>
@@ -11,6 +12,6 @@
 <jsp:include page="mainmenu.jsp"/>
 
 
-<jsp:include page="debuginfo.jsp"/>
+<%-- <jsp:include page="debuginfo.jsp"/> --%>
 </body>
 </html>

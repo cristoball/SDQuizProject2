@@ -3,7 +3,7 @@ package quiz.data;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizInMemory implements Quiz
+public class QuizInMemory implements QuizInterface
 {
 	private List<Question> questions;
 	private String name = "State Capitals";
@@ -13,7 +13,7 @@ public class QuizInMemory implements Quiz
 		loadQuestions();
 	}
 
-	public int getQuizID()
+	public int getId()
 	{
 		return -1;
 	}
@@ -49,7 +49,7 @@ public class QuizInMemory implements Quiz
 
 	}
 
-	public String getQuizName()
+	public String getName()
 	{
 		return name;
 	}

@@ -11,16 +11,38 @@
 	<h1>Available Quizzes</h1>
 	<table border="1"  >
 		<tr align="center">
-			<td>ID</td>
+			<td>Quiz ID</td>
 			<td>Quiz Name</td>
 			<td># of Questions</td>
 			<td></td>
 		</tr>
 		<tr align="center">
-			<td>${quiz.quizID}</td>
-			<td>${quiz.quizName}</td>
+			<td>${quiz.id}</td>
+			<td>${quiz.name}</td>
 			<td>${quiz.numberOfQuestions}</td>
-			<td><a href="questions.html?startQuiz=1">Start!</a></td>
+			<td valign="middle">
+				<form action="questions.html?startQuiz=${quiz.id}&ajax=false" method="get">
+					<input class="btnSubmit" type="submit" value="Start Quiz" />
+				</form>
+<!-- 				<a href="questions.html?startQuiz=1">Start!</a> -->
+			</td>
+		</tr>
+		<tr align="center">
+			<td>Quiz ID</td>
+			<td>Quiz Name</td>
+			<td># of Questions</td>
+			<td></td>
+		</tr>
+		<tr align="center">
+			<td>${quiz.id}</td>
+			<td>${quiz.name} with Ajax</td>
+			<td>${quiz.numberOfQuestions}</td>
+			<td valign="middle">
+				<form action="Rest.html?startQuiz=${quiz.id}&ajax=true" method="get">
+					<input class="btnSubmit" type="submit" value="Start Quiz" />
+				</form>
+<!-- 				<a href="questions.html?startQuiz=1">Start!</a> -->
+			</td>
 		</tr>
 	</table>
 

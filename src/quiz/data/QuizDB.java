@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuizDB implements Quiz
+public class QuizDB implements QuizInterface
 {
 
 	private int id;
@@ -33,13 +33,13 @@ public class QuizDB implements Quiz
 		}
 	}
 
-	public int getQuizID()
+	public int getId()
 	{
 		return id;
 	}
 
 	@Override
-	public String getQuizName()
+	public String getName()
 	{
 		return name;
 	}

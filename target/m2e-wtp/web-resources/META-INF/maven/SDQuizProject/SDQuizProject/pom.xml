@@ -35,57 +35,66 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<!--  Dependency for Derby Client -->
-		<!--<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.11.1.1</version>
-		</dependency> -->
-		<!--  Dependency for SQLite Client -->
+		<!-- Dependency for Derby Client -->
+		<!--<dependency> <groupId>org.apache.derby</groupId> <artifactId>derbyclient</artifactId> <version>10.11.1.1</version> 
+			</dependency> -->
+		<!-- Dependency for SQLite Client -->
 		<dependency>
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.8.11.1</version>
 		</dependency>
-		<!--  Dependency for Spring MVC -->
+		<!-- Dependency for Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.2.0.RELEASE</version>
 		</dependency>
-		<!--  Dependency for EclipseLink (JPA) -->
+		<!-- Dependency for EclipseLink (JPA) -->
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>org.eclipse.persistence.jpa</artifactId>
 			<version>2.6.0</version>
 		</dependency>
-		<!--  Dependency for Spring JPA -->
+		<!-- Dependency for Spring JPA -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>4.2.0.RELEASE</version>
 		</dependency>
-		<!--  Dependency for Servlet API -->
+		<!-- Dependency for Servlet API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
-		<!--  Dependencies for JSON support -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>2.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.6.1</version>
-		</dependency>
+		<!-- Dependencies for JSON support -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 			<artifactId>jackson-annotations</artifactId> -->
+<!-- 			<version>2.6.3</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 			<artifactId>jackson-core</artifactId> -->
+<!-- 			<version>2.6.3</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.fasterxml.jackson.core</groupId> -->
+<!-- 			<artifactId>jackson-databind</artifactId> -->
+<!-- 			<version>2.6.3</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.jackson</groupId> -->
+<!-- 			<artifactId>jackson-mapper-asl</artifactId> -->
+<!-- 			<version>1.9.13</version> -->
+<!-- 		</dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>com.googlecode.log4jdbc</groupId> -->
+		<!-- <artifactId>log4jdbc</artifactId> -->
+		<!-- <version>1.2</version> -->
+		<!-- </dependency> -->
+
 	</dependencies>
 </project>

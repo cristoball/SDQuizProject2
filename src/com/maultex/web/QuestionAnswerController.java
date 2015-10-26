@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import quiz.data.Quiz;
+import quiz.data.QuizInterface;
 import quiz.data.QuizInMemory;
 
 @Controller
@@ -20,22 +20,22 @@ public class QuestionAnswerController
 	}
 
 	@ModelAttribute("quiz")
-	public Quiz getInitialQuiz()
+	public QuizInterface getInitialQuiz()
 	{
 		return new QuizInMemory();
 	}
 
 	@RequestMapping("/DisplayName.do")
-	public ModelAndView getQuizName(@ModelAttribute Quiz quiz)
+	public ModelAndView getQuizName(@ModelAttribute QuizInterface quiz)
 	{
 		// Quiz quiz = new QuizInMemory();
-		System.out.println(quiz.getQuizName());
-		return new ModelAndView("quizname", "name", quiz.getQuizName());
+		System.out.println(quiz.getName());
+		return new ModelAndView("quizname", "name", quiz.getName());
 
 	}
 
 	@RequestMapping("/DisplayNumber.do")
-	public ModelAndView getNumberOfQuestions(@ModelAttribute Quiz num)
+	public ModelAndView getNumberOfQuestions(@ModelAttribute QuizInterface num)
 	{
 		// Quiz num = new QuizInMemory();
 		System.out.println(num.getNumberOfQuestions());
@@ -44,7 +44,7 @@ public class QuestionAnswerController
 	}
 
 	@RequestMapping("/DisplayQuestions.do")
-	public ModelAndView getQuestions(@ModelAttribute("count") int count, @ModelAttribute Quiz questions, String answers)
+	public ModelAndView getQuestions(@ModelAttribute("count") int count, @ModelAttribute QuizInterface questions, String answers)
 	{
 		System.out.println(answers);
 		// Quiz questions = new QuizInMemory();
@@ -71,7 +71,7 @@ public class QuestionAnswerController
 	}
 
 	@RequestMapping("/DisplayResults.do")
-	public ModelAndView getResults(@ModelAttribute Quiz results)
+	public ModelAndView getResults(@ModelAttribute QuizInterface results)
 	{
 		// Quiz results = new QuizInMemory();
 		System.out.println(results.getResults());

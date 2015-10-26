@@ -1,28 +1,38 @@
 body {
-	background-color: #ccc;
+	background-color: #C2D1FF;;
 }
+
+#correct {
+	color: green;
+}
+#incorrect {
+	color: red;
+}
+
 
 h1 {
 	width: 1000px;
-	margin: 5px auto;
+/* 	margin: 5px auto; */
 	padding-bottom: 10px;
-	border-bottom: 1px solid #930;
+/* 	border-bottom: 1px solid #930; */
+	text-decoration: underline;
 	font-size: xx-large;
 	color: #930;
 }
 
 /*Begin Form Styles*/
 form {
-	width: 1000px;
+/* 	width: 1000px; */
 	margin: auto;
 	padding-bottom: 20px;
 	color: #930;
-	border: 1px solid black;
+/* 	border: 1px solid black; */
 }
 
 fieldset {
-	width: 480px; margin-bottom : 10px;
-	border-bottom: 1px solid #930;
+	width: 480px; 
+	margin-bottom : 10px;
+	border: 2spx solid #930;
 	background-color: #eec;
 	margin-bottom: 10px;
 }
@@ -34,7 +44,7 @@ legend {
 	letter-spacing: .5em;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-variant: small-caps;
-	color: #460;
+	color: #930;
 }
 
 fieldset fieldset {
@@ -65,9 +75,10 @@ form p {
 
 form li {
 	list-style-type: none;
-	border-bottom: 1px dotted #000;
+	
+/* 	border-bottom: 1px dotted #000; */
 	padding-bottom: 2px;
-	margin-bottom: 2px;
+/* 	margin-bottom: 2px; */
 }
 
 label {
@@ -95,8 +106,25 @@ textarea {
 	height: 50px;
 }
 
+.btnSubmit {
+/* 	border: 1px solid black; */
+/* 	width: 100px; */
+/* 	height: 40px; */
+	border-radius: 10px;
+	background-color: #930;
+	color: white;
+}
+
+.btnSubmit:hover {
+/* 	border: 1px solid black; */
+/* 	width: 120px; */
+/* 	height: 60px; */
+	text-decoration: underline;
+	background-color: #930;
+}
 
 #buttons input {
+	border: 1px solid black;
 	height: 100px;
 	width: 350px;
 	font-size: 1.5em;
@@ -146,3 +174,21 @@ textarea {
 	text-align: center;
 }
 /*End Form Styles*/
+
+/* LINK STYLES */
+a:link {
+	
+}
+
+a:hover {
+	
+}
+
+a:visited {
+	
+}
+
+a:active {
+	
+}
+/* END LINK STYLES */

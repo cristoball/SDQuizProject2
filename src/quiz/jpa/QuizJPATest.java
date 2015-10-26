@@ -1,58 +1,63 @@
 package quiz.jpa;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
-public class QuizJPATest
+import quiz.jpa.Answer;
+import quiz.jpa.Question;
+import quiz.jpa.Quiz;
+
+public class QuizJPATest 
 {
-	public static void main(String[] a) throws Exception
-	{
+	private static EntityManagerFactory emf = null;
+	private static EntityManager em = null;
 
-//		EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProfessorService");
-//		EntityManager em = emf.createEntityManager();
-//		ProfessorService service = new ProfessorService(em);
-//
-//		em.getTransaction().begin();
-//		Professor emp = service.createProfessor("empName", 100);
-//
-//		Project proj = service.createProject("projName");
-//
-//		emp = service.addProfessorProject(emp.getId(), proj.getId());
-//
-//		Collection<Professor> emps = service.findAllProfessors();
-//		if (emps.isEmpty())
-//		{
-//			System.out.println("No Professors found ");
-//		} else
-//		{
-//			System.out.println("Found Professors:");
-//			for (Professor emp1 : emps)
-//			{
-//				System.out.println(emp1);
-//			}
-//		}
-//
-//		Collection<Project> projs = service.findAllProjects();
-//		if (projs.isEmpty())
-//		{
-//			System.out.println("No Projects found ");
-//		} else
-//		{
-//			System.out.println("Found Projects:");
-//			for (Project proj1 : projs)
-//			{
-//				System.out.println(proj1);
-//			}
-//		}
-//
-//		util.checkData("select * from Professor");
-//
-//		util.checkData("select * from Project");
-//		em.getTransaction().commit();
-//		em.close();
-//		emf.close();
+	public static void main(String[] args) throws Exception {
+		emf = Persistence.createEntityManagerFactory("QuizPersistenceUnit");
+		em = emf.createEntityManager();
+
+		Quiz quiz = em.find(Quiz.class, 1);
+		System.out.println(quiz.getName());
+
+		List<Question> lsQuestions = quiz.getQuestions();
+		for (Question question : lsQuestions) {
+			System.out.println(question.getText());
+
+			List<Answer> answers = question.getAnswers();
+			for (Answer an : answers) {
+				System.out.println(an.getText() + " " + an.isCorrect());
+			}
+
+		}
+		
+		User user = getUserByEmailAndPassword(em, "test@test.net", "test");
+		System.out.println(user.getEmail());
+		System.out.println(user.getPassword());
+		System.out.println(user.getID());
+		System.out.println(user.getFirstName());
+		System.out.println(user.getLastName());
+		System.out.println(user.getAdmin());
+		
+		em.close();
+		emf.close();
 	}
+	
+	public static User getUserByEmailAndPassword(EntityManager em, String email, String password) {
+	    try {
+			TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :password", User.class);
+		    query.setParameter("email", email);
+		    query.setParameter("password", password);
+		    User user = query.getSingleResult();
+		    return user;
+	    }
+	    catch (Exception ex) {
+	    	System.out.println(ex);
+	    }
+	    return null;
+	} 
 }

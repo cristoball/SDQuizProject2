@@ -27,9 +27,19 @@
 		<url-pattern>/quiz.html</url-pattern>
 	</servlet-mapping>
 	
-		<servlet-mapping>
+	<servlet-mapping>
 		<servlet-name>quiz</servlet-name>
 		<url-pattern>/questions.html</url-pattern>
 	</servlet-mapping>
+  
+	<servlet-mapping>
+		<servlet-name>quiz</servlet-name>
+		<url-pattern>/Rest.html</url-pattern>
+	</servlet-mapping>  
+	
+	<servlet-mapping>
+		<servlet-name>quiz</servlet-name>
+		<url-pattern>/Results.html</url-pattern>
+	</servlet-mapping> 
   
 </web-app>

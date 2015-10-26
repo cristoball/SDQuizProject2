@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.maultex.data.Authenticate;
-import com.maultex.data.User;
-import com.maultex.data.UserManager;
+import quiz.jpa.Authenticate;
+import quiz.jpa.User;
+import quiz.jpa.UserManager;
 
 
 @Controller

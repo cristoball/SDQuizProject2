@@ -4,13 +4,18 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import quiz.data.Question;
-import quiz.data.Quiz;
+import quiz.data.QuizInterface;
 
 @Controller
 @RequestMapping("/questions")
@@ -21,16 +26,13 @@ public class QuestionController
 	public ModelAndView onGetQuestion(String startQuiz, HttpSession session) throws Exception
 	{
 		//start quiz not currently used
-		Quiz quiz = (Quiz)session.getAttribute("quiz");//new QuizDB(conn);
+		QuizInterface quiz = (QuizInterface)session.getAttribute("quiz");//new QuizDB(conn);
 		session.setAttribute("counter", 0);
 			
 		int nQuestionIndex = 0; //start with first question in quiz.questions (0 based List)
 		
 		Question question = quiz.getQuestions().get(nQuestionIndex);
-
-		System.out.println("Question Index=" + nQuestionIndex);
-		System.out.println("question.getId()=" + question.getId());
-
+		
 		return new ModelAndView("showquestions", "question", question);
 	}
 
@@ -42,7 +44,7 @@ public class QuestionController
 		System.out.println("currentCounter = " + currentCounter);
 		int nCounter = Integer.parseInt(currentCounter);
 
-		Quiz quiz = (Quiz) session.getAttribute("quiz");
+		QuizInterface quiz = (QuizInterface) session.getAttribute("quiz");
 		System.out.println("Quiz from session =" + quiz + "\n");
 
 		// need to save answer
@@ -64,8 +66,10 @@ public class QuestionController
 		{
 			//DataSource.getConnection().close();
 			int nCorrect = getTotalCorrect(quiz);
+			int nSkipped = getTotalSkipped(quiz);
 			ModelAndView mv = new ModelAndView("results");
 			mv.addObject("TotalCorrect", nCorrect);
+			mv.addObject("TotalSkipped", nSkipped);
 			return mv;
 		} 
 		else //show next question
@@ -76,12 +80,59 @@ public class QuestionController
 		}
 	}
 	
+	
+	//Ajax REST get Quiz as JSON object
+	@RequestMapping(method = RequestMethod.GET, params="quiz")
+	public @ResponseBody String onGetQuiz(HttpSession session) throws Exception
+	{
+		QuizInterface quiz = (QuizInterface) session.getAttribute("quiz");
+		
+//		TestJson test = new TestJson();
+//		System.out.println("HIT call for Quiz json: ");
+//		return test;
+		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();  //FORCING OBJECT TO JSON SINCE SPRING IS NOT PICKING UP JACKSON
+		String json = ow.writeValueAsString(quiz);
+		return json;
+	}
+	
+	
+	
+	//Get the number of questions skipped
+	private int getTotalSkipped(QuizInterface quiz)
+	{
+		int totalSkipped = 0;
+		for (int i = 0; i < quiz.getNumberOfQuestions(); i++)
+		{
+			String givenAnswer = quiz.getQuestions().get(i).getGivenAnswer();
+			System.out.println("Given Answer" + i + ": " + givenAnswer);
+			if (givenAnswer.equals("(You did not answer this question)"))
+			{
+				totalSkipped++;
+			}
+		}
+		return totalSkipped;
+	}
+
+	@RequestMapping(method=RequestMethod.GET, params="correct")
+	@ResponseBody
+	public String getTotalCorrect(HttpSession session)
+	{
+		QuizInterface quiz = (QuizInterface) session.getAttribute("quiz");
+		System.out.println("Ajax REST get quiz correct for quiz =" + quiz) ;
+		int nCorrect = getTotalCorrect(quiz);
+		String sCorrect = Integer.toString(nCorrect);
+		System.out.println("Total Correct: " + sCorrect);
+		return sCorrect;
+		
+	}
+	
+	
 	/**
 	 * Calculate total number of correctly answered questions
 	 * @param quiz
 	 * @return
 	 */
-	public int getTotalCorrect(Quiz quiz)
+	public int getTotalCorrect(QuizInterface quiz)
 	{
 		int totalCorrect = 0;
 		for (int i = 0; i < quiz.getNumberOfQuestions(); i++)
@@ -96,4 +147,16 @@ public class QuestionController
 		return totalCorrect;
 	}
 	
+}
+
+class TestJson {
+	
+	public String jsonString = "TJS";
+
+	public void setJsonString(String text) {
+		this.jsonString = text;
+	}
+	public String getJsonString() {
+		return this.jsonString;
+	}
 }

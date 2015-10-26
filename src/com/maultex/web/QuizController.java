@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import quiz.data.DataSource;
-import quiz.data.Quiz;
+import quiz.data.QuizInterface;
 import quiz.data.QuizDB;
 import quiz.data.QuizInMemory;
 
@@ -26,7 +26,8 @@ public class QuizController
 	public String onGet(HttpSession session) throws Exception
 	{
 		//Quiz quiz = new QuizInMemory();
-		Quiz quiz = new QuizDB(DataSource.getConnection());
+		//Quiz quiz = new QuizDB(DataSource.getConnection());
+		QuizInterface quiz = new QuizDB(DataSource.getConnection());
 		session.setAttribute("quiz", quiz);
 		//return new ModelAndView("viewquizzes", "quiz", quiz);
 		return "viewquizzes";

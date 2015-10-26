@@ -8,11 +8,13 @@
 </head>
 <body>
 <h1>Please login to continue</h1>
-<form name="login" method="post" action="login.html">
-	<font color="red">${error}</font><br/>
-	Username: <input name="username" type="text" value="test@test.net" size="30"/><br/>
-	Password: <input name="password" type="password" value="test" size="20"/><br/>
-	<input type="submit" value="Login"/>
+<form name="frmlogin" id="frmLogin" method="post" action="login.html">
+	<ul>
+	<li><font color="red">${error}</font><br/></li>
+	<li>Username: <input name="username" type="text" value="test@test.net" autofocus/><br/></li>
+	<li>Password: <input name="password" type="password" value="test" /><br/></li>
+	<li><input type="submit" value="Login"/></li>
+	</ul>
 	<br/>
 </form>
 <br/>

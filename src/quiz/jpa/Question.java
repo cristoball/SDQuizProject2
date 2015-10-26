@@ -12,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import quiz.data.Answer;
 
 @Entity
 @Table
@@ -25,21 +24,15 @@ public class Question
 	@Column
 	private String text;
 
+	@ManyToMany(mappedBy="questions")
+	private List<Quiz> quizzes;	
+	
 	@OneToMany(mappedBy="question")
 	private List<Answer> answers;
 
 	@Transient
 	private String givenAnswer;
 	
-	@ManyToMany(mappedBy="quiz")
-	private List<Quiz> quizzes;
-
-	public Question(int id, String questionTxt, List<Answer> answers)
-	{
-		this.id = id;
-		this.text = questionTxt;
-		this.answers = answers;
-	}
 
 	public int getId()
 	{
@@ -51,7 +44,7 @@ public class Question
 		return this.text;
 	}
 
-	void setText(String questionTxt)
+	public void setText(String questionTxt)
 	{
 		this.text = questionTxt;
 	}
@@ -61,9 +54,22 @@ public class Question
 		return answers;
 	}
 
-	void setAnswers(List<Answer> answers)
+	public void setAnswers(List<Answer> answers)
 	{
 		this.answers = answers;
+		for (Answer answer : answers) 
+		{
+			if (!answer.getQuestion().equals(this))
+				answer.setQuestion(this);
+		}		
+	}
+	
+	public void addAnswer(Answer answer) {
+		if (!answers.contains(answer)) {
+			answers.add(answer);
+		}
+		if(!answer.getQuestion().equals(this))
+		answer.setQuestion(this);
 	}
 
 	public String getGivenAnswer()
@@ -89,7 +95,10 @@ public class Question
 	@Override
 	public String toString()
 	{
-		return "Question [id=" + id + ", text=" + text + ", answers=" + answers + ", givenAnswer=" + givenAnswer
+		return "Question [id=" + id + 
+				", "+ "text=" + text + 
+				", answers=" + answers + 
+				", givenAnswer=" + givenAnswer
 				+ "]";
 	}
 }

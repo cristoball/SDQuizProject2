@@ -1,0 +1,1 @@
+This folder and file existh here for testing the JPA/ORM ofof the quiz objects/beans such as Quiz, Question, Answer 

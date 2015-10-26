@@ -1,11 +1,11 @@
-package quiz.data;
+package quiz.jpa;
 
 import java.util.List;
 
-public interface Quiz {
+public interface QuizInterface {
 	
-	public int getQuizID();
-	public String getQuizName();
+	public int getId();
+	public String getName();
 	public int getNumberOfQuestions();
 	public List<Question> getQuestions();
 	public String getResults();

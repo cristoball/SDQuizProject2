@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import quiz.data.Quiz;
+import quiz.data.QuizInterface;
 import quiz.data.QuizDB;
 import quiz.data.QuizInMemory;
 
@@ -18,7 +18,7 @@ import quiz.data.QuizInMemory;
 @SuppressWarnings("serial")
 public class QuizGUI extends JFrame {
 	
-	private Quiz quiz;
+	private QuizInterface quiz;
 	private int currentCard = 0;
 	private JPanel cards;
 	private JButton nextButton;
@@ -30,7 +30,7 @@ public class QuizGUI extends JFrame {
 		// Uncomment the following to use the DB version instead
 		//quiz = new QuizDB();
 		
-		this.setTitle(quiz.getQuizName());
+		this.setTitle(quiz.getName());
 
 		cards = new JPanel(new CardLayout());
 		for (int i = 0; i < quiz.getNumberOfQuestions(); i++) {

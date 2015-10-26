@@ -3,7 +3,9 @@ package com.maultex.data;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import quiz.data.DataSource;
@@ -20,97 +22,115 @@ public class UserManager implements Authenticate
 	 */
 	public User login(String username, String password)
 	{
-
-		String sqltxt;
-		sqltxt = "Select id, firstname, lastname, email, password " + 
-				"From App.Account " + 
-				"Where email = '" + username + "' " + //joe@example.com' "
-				"And password = '" + password + "'";// joe'";
-
-		try
-		{
-
+		
+		try 
+		{	
 			Connection conn = DataSource.getConnection();
+			PreparedStatement stmt = getSecureSqlStatement(username, password, conn);
+			ResultSet rs = stmt.executeQuery();		
 			
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sqltxt);
-
-			System.out.println(stmt.toString());
-			System.out.println(sqltxt);
 			// check Quiz db integrity
 			if (rs.getFetchSize() > 1)
 			{
 				throw new IllegalStateException("More than one user account found");
 			}
 
-			System.out.println("User found in db. Authenticate.");
 			if (rs.next())
 			{
-				System.out.println("Email=" + rs.getString(4) + ", password=" + rs.getString(5));
 				User loggedInUser = new User();
-				loggedInUser.setEmail("chris.mauldin@gmail.com");
+				loggedInUser.setID(rs.getInt(1));
 				loggedInUser.setFirstName(rs.getString(2));
 				loggedInUser.setLastName(rs.getString(3));
-				loggedInUser.setID(rs.getInt(1));
+				loggedInUser.setEmail(rs.getString(4));
+				
 				System.out.println("User found: " + loggedInUser);
 				return loggedInUser;
-			} else
+			} 
+			else
 			{
 				System.out.println("User not found");
 
 			}
 
-		} catch (Exception ex)
+		} 
+		catch (Exception ex)
 		{
 			ex.printStackTrace();
 		}
+		
 		return null;
+	}
+
+
+	/**
+	 * Get a prepared securely prepared login
+	 * @param username
+	 * @param password
+	 * @param conn
+	 * @return
+	 * @throws SQLException
+	 */
+	private static PreparedStatement getSecureSqlStatement(String username, String password, Connection conn) throws SQLException
+	{
+		String sqltxt = "Select id, firstname, lastname, email, password " + 
+						"From App.Account " + 
+						"Where email=? And password=?";
+		
+		
+		PreparedStatement stmt = conn.prepareStatement(sqltxt);
+		stmt.setString(1, username);
+		stmt.setString(2, password);
+		
+		System.out.println("SQL login query: " + stmt.toString());
+		return stmt;
 	}
 
 	
 	/**
 	 * Simple db test of authenticating through Account table
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String args[])
+	public static void main(String args[]) throws Exception
 	{
 		String URL = "jdbc:derby://localhost:1527/quiz";
-		String sqltxt;
-		sqltxt = "Select email, password " + 
-				"From App.Account " + 
-				"Where email = 'joe@example.com' " +
-				"And password = 'joe'";
-
-		try (Connection conn = DriverManager.getConnection(URL);
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(sqltxt);)
+		
+		try (Connection conn = DriverManager.getConnection(URL);)
+				
 		{
-			System.out.println(stmt.toString());
-			System.out.println(sqltxt);
+			
+			PreparedStatement stmt =UserManager.getSecureSqlStatement("test@test.net", "test", conn);
+			ResultSet rs = stmt.executeQuery();		
+			
 			// check Quiz db integrity
 			if (rs.getFetchSize() > 1)
 			{
 				throw new IllegalStateException("More than one user account found");
 			}
 
-			System.out.println("User found in db. Authenticate.");
 			if (rs.next())
 			{
-				System.out.println("Email=" + rs.getString(1) + ", password=" + rs.getString(2));
 				User loggedInUser = new User();
-				loggedInUser.setEmail("chris.mauldin@gmail.com");
-				loggedInUser.setFirstName("Chris");
-				loggedInUser.setLastName("Mauldin");
+				loggedInUser.setID(rs.getInt(1));
+				loggedInUser.setFirstName(rs.getString(2));
+				loggedInUser.setLastName(rs.getString(3));
+				loggedInUser.setEmail(rs.getString(4));
+				
 				System.out.println("User found: " + loggedInUser);
-			} else
+				//return loggedInUser;
+			} 
+			else
 			{
 				System.out.println("User not found");
+
 			}
 
-		} catch (Exception ex)
+		} 
+		catch (Exception ex)
 		{
 			ex.printStackTrace();
 		}
+
 	}
 
 }
